@@ -2,6 +2,8 @@
 
 [![Built with Astro](https://astro.badg.es/v1/built-with-astro.svg)](https://astro.build)
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b8c3e79b-bc42-4f6e-bd02-347b47717ca3/deploy-status)](https://app.netlify.com/sites/orbithull/deploys)
+
 > An Astro + Tailwind CSS starter for landing pages.
 
 ## Features
