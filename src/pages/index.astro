@@ -1,0 +1,32 @@
+---
+import "@fontsource/inter/variable.css";
+import Splash from "~/components/splash.astro";
+import "~/styles/index.css";
+
+const { generator, site } = Astro;
+const image = new URL("social.jpg", site);
+const description = "Modular Cargo Containers for Orbital Tasking - OrbitHull";
+---
+
+<!DOCTYPE html>
+<html lang="en" class="h-full" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <meta name="generator" content={generator} />
+    <title>OrbitHull</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content="Astro" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:url" content={site} />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body
+    class="h-full overflow-x-hidden bg-default text-default text-base selection:bg-secondary selection:text-white"
+  >
+    <Splash />
+  </body>
+</html>

@@ -1,0 +1,79 @@
+---
+import { Picture } from "@astrojs/image/components";
+import earthImage from "~/assets/earth-nasa.png";
+import Starfield from "~/components/starfield.astro";
+
+const widths = [450, 800];
+const sizes = "(min-width: 640px) 42vw, 67vw";
+---
+
+<section class="relative h-full bg-black">
+  <Starfield />
+  <div class="relative grid h-full place-items-center sm:grid-cols-2">
+    <div class="flex flex-col gap-2 self-end sm:gap-4 sm:self-auto sm:justify-self-end">
+      <h2>
+        <div class="gradient-text text-center font-extrabold text-8xl">
+          OrbitHull
+        </div>
+      </h2>
+      <h3>
+        <div class="text-center tracking-tighter text-6xl">
+          Modular Cargo Containers
+          <br>for Orbital Tasking.
+        </div>
+      </h3>
+      <p class="text-center text-.5xl text-gray-500 hover:text-pink-400">info@orbithull.com</p>
+    </div>
+    <div
+      id="earth"
+      class="w-2/3 max-w-3xl self-start sm:w-10/12 sm:self-auto sm:justify-self-start"
+    >
+      <Picture
+        class="object-cover w-full h-full"
+        src={earthImage}
+        widths={widths}
+        sizes={sizes}
+        loading="eager"
+        alt="Orbiting Earth in the future"
+      />
+    </div>
+  </div>
+</section>
+
+<noscript>
+  <style>
+    #splash-bg-fallback {
+      display: block;
+    }
+  </style>
+</noscript>
+
+<style>
+  @keyframes float {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+      transform: translate3d(0, 20px, 0);
+    }
+  }
+
+  #earth {
+    animation: float linear 2.5s infinite alternate;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #earth {
+      @apply animate-none;
+    }
+
+    :global(#starfield) {
+      @apply hidden;
+    }
+
+    #splash-bg-fallback {
+      @apply block;
+    }
+  }
+</style>
