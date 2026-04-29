@@ -10,20 +10,18 @@
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --write .",
-    "clean": "rimraf dist .astro node_modules"
+    "clean": "rm -rf dist .astro node_modules"
   },
   "devDependencies": {
     "astro": "^6.1.10",
-    "prettier": "2.8.8",
-    "prettier-plugin-astro": "^0.8.0",
-    "prettier-plugin-tailwindcss": "^0.2.7",
-    "rimraf": "^5.0.0",
+    "prettier": "^3.8.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.8.0",
     "tailwindcss": "^4.2.4"
   },
   "dependencies": {
-    "@fontsource/inter": "^4.5.14",
+    "@fontsource-variable/inter": "^5.2.8",
     "@tailwindcss/postcss": "^4.2.4",
-    "sharp": "^0.34.5",
-    "tiny-invariant": "^1.3.1"
+    "sharp": "^0.34.5"
   }
 }
