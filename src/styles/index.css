@@ -1,3 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "InterVariable", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  /* fluid font sizes using clamp */
+  --text-6xl: clamp(2.5rem, 6vw, 3.75rem);
+  --text-8xl: clamp(3rem, 8vw, 6rem);
+}
+
+@theme inline {
+  --color-primary: var(--app-primary);
+  --color-secondary: var(--app-secondary);
+}
+
+@utility bg-default {
+  background-color: var(--app-background);
+}
+
+@utility text-default {
+  color: var(--app-text);
+}
 
 .gradient-text {
   @apply bg-clip-text text-transparent;
@@ -5,11 +28,11 @@
 }
 
 [data-theme="dark"] {
-  --color-primary: theme("colors.pink.400");
-  --color-secondary: theme("colors.indigo.400");
-  --color-text: theme("colors.gray.50");
-  --color-text-offset: theme("colors.gray.400");
-  --color-background: theme("colors.gray.900");
-  --color-background-offset: theme("colors.gray.800");
-  --color-border: theme("colors.gray.50" / 10%);
+  --app-primary: var(--color-pink-400);
+  --app-secondary: var(--color-indigo-400);
+  --app-text: var(--color-gray-50);
+  --app-text-offset: var(--color-gray-400);
+  --app-background: var(--color-gray-900);
+  --app-background-offset: var(--color-gray-800);
+  --app-border: color-mix(in srgb, var(--color-gray-50) 10%, transparent);
 }

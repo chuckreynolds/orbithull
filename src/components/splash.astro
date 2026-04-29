@@ -1,5 +1,5 @@
 ---
-import { Picture } from "@astrojs/image/components";
+import { Picture } from "astro:assets";
 import earthImage from "~/assets/earth-nasa.png";
 import Starfield from "~/components/starfield.astro";
 
@@ -22,7 +22,7 @@ const sizes = "(min-width: 640px) 42vw, 67vw";
           <br>for Orbital Tasking.
         </div>
       </h3>
-      <p class="text-center text-.5xl text-gray-500 hover:text-pink-400">info@orbithull.com</p>
+      <p class="text-center text-sm text-gray-500 hover:text-pink-400">info@orbithull.com</p>
     </div>
     <div
       id="earth"

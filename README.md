@@ -4,12 +4,16 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b8c3e79b-bc42-4f6e-bd02-347b47717ca3/deploy-status)](https://app.netlify.com/sites/orbithull/deploys)
 
-> An Astro + Tailwind CSS starter for landing pages.
+> OrbitHull landing page built with Astro and Tailwind CSS.
+
+## Stack
+
+- [Astro](https://astro.build) v6
+- [Tailwind CSS](https://tailwindcss.com) v4 (via PostCSS)
 
 ## Features
 
-- 💨 Tailwind CSS for styling
-  - CSS variables are defined in `src/styles/index.css` and mapped to Tailwind classes (`tailwind.config.cjs`)
+- 💨 Tailwind CSS v4 — config lives in `src/styles/index.css` via `@theme`
 - 🌙 Dark mode
 - 📱 Responsive (layout, images, typography)
 - ♿ Accessible (as measured by https://web.dev/measure/)
@@ -22,7 +26,7 @@
 | Command                | Action                                            |
 | :--------------------- | :------------------------------------------------ |
 | `npm install`          | Install dependencies                              |
-| `npm run dev`          | Start local dev server at `localhost:3000`        |
+| `npm run dev`          | Start local dev server at `localhost:4321`        |
 | `npm run build`        | Build your production site to `./dist/`           |
 | `npm run preview`      | Preview your build locally, before deploying      |
 | `npm run astro ...`    | Run CLI commands like `astro add`, `astro check`  |

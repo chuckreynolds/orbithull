@@ -5,7 +5,8 @@ import "~/styles/index.css";
 
 const { generator, site } = Astro;
 const image = new URL("social.jpg", site);
-const description = "Modular Cargo Containers for Orbital Tasking - OrbitHull";
+const description =
+  "OrbitHull builds modular cargo containers engineered for orbital tasking. Purpose-built payload solutions for the commercial and government space industry.";
 ---
 
 <!DOCTYPE html>
@@ -15,14 +16,25 @@ const description = "Modular Cargo Containers for Orbital Tasking - OrbitHull";
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="/favicon.png" type="image/png" />
     <meta name="generator" content={generator} />
-    <title>OrbitHull</title>
+    <title>OrbitHull — Modular Cargo Containers for Orbital Tasking</title>
     <meta name="description" content={description} />
-    <meta property="og:title" content="OrbitHull" />
+    <meta property="og:title" content="OrbitHull — Modular Cargo Containers for Orbital Tasking" />
     <meta property="og:type" content="website" />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
     <meta property="og:url" content={site} />
     <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "OrbitHull",
+        "url": "https://orbithull.com",
+        "logo": "https://orbithull.com/favicon.png",
+        "email": "info@orbithull.com",
+        "description": "OrbitHull builds modular cargo containers engineered for orbital tasking. Purpose-built payload solutions for the commercial and government space industry."
+      }
+    </script>
   </head>
   <body
     class="h-full overflow-x-hidden bg-default text-default text-base selection:bg-secondary selection:text-white"
