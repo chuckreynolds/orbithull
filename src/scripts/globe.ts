@@ -89,7 +89,11 @@ const atmosphereFragment = /* glsl */ `
 
 // Direction from Earth's center to a surface point, in the sphere's local space
 // (three.js maps the equirectangular seam to -x, so longitude 0 sits on +x).
-function surfaceDirection(latitude: number, longitude: number, target: Vector3) {
+function surfaceDirection(
+  latitude: number,
+  longitude: number,
+  target: Vector3,
+) {
   return target.set(
     Math.cos(latitude) * Math.cos(longitude),
     Math.sin(latitude),
@@ -101,13 +105,17 @@ function surfaceDirection(latitude: number, longitude: number, target: Vector3) 
 function subsolarPoint(date: Date) {
   const startOfYear = Date.UTC(date.getUTCFullYear(), 0, 1);
   const dayOfYear = (date.getTime() - startOfYear) / MS_PER_DAY;
-  const declination = -AXIAL_TILT * Math.cos(((dayOfYear + 10) / 365.25) * Math.PI * 2);
+  const declination =
+    -AXIAL_TILT * Math.cos(((dayOfYear + 10) / 365.25) * Math.PI * 2);
   const utcHours = (date.getTime() % MS_PER_DAY) / 3_600_000;
   const longitude = MathUtils.degToRad((12 - utcHours) * 15);
   return { latitude: declination, longitude };
 }
 
-export async function mountGlobe(canvas: HTMLCanvasElement, onReady: () => void) {
+export async function mountGlobe(
+  canvas: HTMLCanvasElement,
+  onReady: () => void,
+) {
   const renderer = new WebGLRenderer({
     canvas,
     alpha: true,
@@ -118,7 +126,9 @@ export async function mountGlobe(canvas: HTMLCanvasElement, onReady: () => void)
   renderer.setPixelRatio(pixelRatio);
 
   const urls =
-    canvas.clientWidth * pixelRatio > LARGE_TEXTURE_MIN_WIDTH ? TEXTURES.large : TEXTURES.small;
+    canvas.clientWidth * pixelRatio > LARGE_TEXTURE_MIN_WIDTH
+      ? TEXTURES.large
+      : TEXTURES.small;
   const loader = new TextureLoader();
   const [day, night, clouds] = await Promise.all([
     loader.loadAsync(urls.day),
@@ -133,7 +143,9 @@ export async function mountGlobe(canvas: HTMLCanvasElement, onReady: () => void)
 
   const scene = new Scene();
   const camera = new PerspectiveCamera(FOV, 1, 0.1, 100);
-  const angularRadius = Math.atan(DISK_SCALE * Math.tan(MathUtils.degToRad(FOV / 2)));
+  const angularRadius = Math.atan(
+    DISK_SCALE * Math.tan(MathUtils.degToRad(FOV / 2)),
+  );
   const distance = 1 / Math.sin(angularRadius);
 
   const sunDirection = new Vector3();
@@ -156,7 +168,11 @@ export async function mountGlobe(canvas: HTMLCanvasElement, onReady: () => void)
 
   const cloudLayer = new Mesh(
     geometry,
-    new MeshLambertMaterial({ alphaMap: clouds, transparent: true, depthWrite: false }),
+    new MeshLambertMaterial({
+      alphaMap: clouds,
+      transparent: true,
+      depthWrite: false,
+    }),
   );
   cloudLayer.scale.setScalar(1.006);
 
@@ -183,7 +199,9 @@ export async function mountGlobe(canvas: HTMLCanvasElement, onReady: () => void)
   scene.add(tilted, atmosphere);
 
   // Open over the visitor's longitude, estimated from their UTC offset, so their own day or night faces them.
-  const visitorLongitude = MathUtils.degToRad(-new Date().getTimezoneOffset() / 4);
+  const visitorLongitude = MathUtils.degToRad(
+    -new Date().getTimezoneOffset() / 4,
+  );
   orbit.rotation.y = -Math.PI / 2 - visitorLongitude;
 
   const updateSun = () => {
@@ -218,8 +236,13 @@ export async function mountGlobe(canvas: HTMLCanvasElement, onReady: () => void)
     cloudLayer.rotation.y += CLOUD_DRIFT * delta;
     updateSun();
 
-    const sway = Math.sin((elapsed / SWAY_PERIOD) * Math.PI * 2) * SWAY_INCLINATION;
-    camera.position.set(0, Math.sin(sway) * distance, Math.cos(sway) * distance);
+    const sway =
+      Math.sin((elapsed / SWAY_PERIOD) * Math.PI * 2) * SWAY_INCLINATION;
+    camera.position.set(
+      0,
+      Math.sin(sway) * distance,
+      Math.cos(sway) * distance,
+    );
     camera.lookAt(0, 0, 0);
 
     renderer.render(scene, camera);

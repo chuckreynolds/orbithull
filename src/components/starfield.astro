@@ -53,7 +53,9 @@
   const stars = Array.from({ length: COUNT }, () => new Star(0, 0, 0));
   let rafId = 0;
 
-  const canvas = document.querySelector("#starfield-canvas") as HTMLCanvasElement;
+  const canvas = document.querySelector(
+    "#starfield-canvas",
+  ) as HTMLCanvasElement;
   const ctx = canvas.getContext("2d")!;
   const container = document.querySelector("#starfield") as HTMLElement;
   const resizeObserver = new ResizeObserver(setup);
