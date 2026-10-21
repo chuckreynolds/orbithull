@@ -26,19 +26,52 @@ const sizes = "(min-width: 640px) 42vw, 67vw";
     </div>
     <div
       id="earth"
-      class="w-2/3 max-w-3xl self-start sm:w-10/12 sm:self-auto sm:justify-self-start"
+      class="relative w-2/3 max-w-3xl self-start sm:w-10/12 sm:self-auto sm:justify-self-start"
     >
       <Picture
-        class="object-cover w-full h-full"
+        class="object-cover w-full h-full transition-opacity duration-1000"
         src={earthImage}
         widths={widths}
         sizes={sizes}
         loading="eager"
         alt="Orbiting Earth in the future"
       />
+      <canvas
+        class="absolute inset-0 size-full opacity-0 transition-opacity duration-[2000ms]"
+        aria-hidden="true"
+      ></canvas>
+      <script is:inline>
+        // Runs before first paint so the photo never flashes when the globe is about to fade in from black.
+        if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          document.querySelector("#earth img").classList.add("opacity-0");
+        }
+      </script>
     </div>
   </div>
 </section>
+
+<script>
+  const earth = document.querySelector("#earth") as HTMLElement;
+  const canvas = earth.querySelector("canvas")!;
+  const picture = earth.querySelector("img")!;
+
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      observer.disconnect();
+      import("~/scripts/globe")
+        .then(({ mountGlobe }) =>
+          mountGlobe(canvas, () => canvas.classList.remove("opacity-0")),
+        )
+        .catch((error) => {
+          // Without WebGL, fall back to the static photo.
+          picture.classList.remove("opacity-0");
+          console.warn("Globe unavailable:", error);
+        });
+    });
+    observer.observe(earth);
+  }
+</script>
 
 <noscript>
   <style>
