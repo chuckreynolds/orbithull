@@ -13,7 +13,7 @@
 
 ## Features
 
-- 💨 Tailwind CSS v4 — config lives in `src/styles/index.css` via `@theme`
+- 💨 Tailwind CSS v4 - config lives in `src/styles/index.css` via `@theme`
 - 🌙 Dark mode
 - 📱 Responsive (layout, images, typography)
 - ♿ Accessible (as measured by https://web.dev/measure/)
