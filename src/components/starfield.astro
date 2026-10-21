@@ -5,6 +5,7 @@
 <script>
   const COUNT = 800;
   const SPEED = 0.1;
+  const MAX_PIXEL_RATIO = 2;
 
   class Star {
     x: number;
@@ -58,14 +59,16 @@
   ) as HTMLCanvasElement;
   const ctx = canvas.getContext("2d")!;
   const container = document.querySelector("#starfield") as HTMLElement;
-  const resizeObserver = new ResizeObserver(setup);
-  resizeObserver.observe(container);
+  // The starfield is hidden for reduced motion, so don't animate it either.
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    new ResizeObserver(setup).observe(container);
+  }
 
   function setup() {
     rafId > 0 && cancelAnimationFrame(rafId);
 
     const { clientWidth: width, clientHeight: height } = container;
-    const dpr = window.devicePixelRatio || 1;
+    const dpr = Math.min(window.devicePixelRatio || 1, MAX_PIXEL_RATIO);
     canvas.width = width * dpr;
     canvas.height = height * dpr;
     canvas.style.width = `${width}px`;
