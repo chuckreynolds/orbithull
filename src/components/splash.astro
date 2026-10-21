@@ -85,25 +85,7 @@ const sizes = "(min-width: 640px) 42vw, 67vw";
 </noscript>
 
 <style>
-  @keyframes float {
-    0% {
-      transform: translate3d(0, 0, 0);
-    }
-
-    100% {
-      transform: translate3d(0, 20px, 0);
-    }
-  }
-
-  #earth {
-    animation: float linear 2.5s infinite alternate;
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    #earth {
-      @apply animate-none;
-    }
-
     :global(#starfield) {
       @apply hidden;
     }
